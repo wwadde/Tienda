@@ -26,7 +26,7 @@ public class EmpleadoService implements EmpleadoServiceInterface {
     }
 
     @Override
-    public Mono<List<RespuestaCliente>> getEmpleados(Long id) {
+    public Mono<List<RespuestaCliente>> getListaClientes(Long id) {
 
         Optional<EmpleadoEntity> empleado = empleadoRepository.findById(id);
 

@@ -23,7 +23,7 @@ public class EmpleadoController {
 
     @GetMapping("{id}")
     public ResponseEntity<?> getEmpleados(@PathVariable Long id) {
-        Mono<List<RespuestaCliente>> listaEmpleados = empleadoService.getEmpleados(id);
+        Mono<List<RespuestaCliente>> listaEmpleados = empleadoService.getListaClientes(id);
         return ResponseEntity.ok(listaEmpleados);
     }
 }
