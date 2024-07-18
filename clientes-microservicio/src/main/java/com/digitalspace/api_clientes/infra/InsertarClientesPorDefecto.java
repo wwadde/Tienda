@@ -3,7 +3,6 @@ package com.digitalspace.api_clientes.infra;
 import com.digitalspace.api_clientes.domain.ClienteEntity;
 import com.digitalspace.api_clientes.repository.ClienteRepository;
 import jakarta.annotation.PostConstruct;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -11,8 +10,12 @@ import java.util.List;
 @Component
 public class InsertarClientesPorDefecto {
 
-    @Autowired
-    private ClienteRepository clienteRepository;
+
+    private final ClienteRepository clienteRepository;
+
+    public InsertarClientesPorDefecto(ClienteRepository clienteRepository) {
+        this.clienteRepository = clienteRepository;
+    }
 
     @PostConstruct
     public void insertarDatos() {

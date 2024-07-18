@@ -6,7 +6,6 @@ import com.digitalspace.api_empleados.domain.UsuarioEntity;
 import com.digitalspace.api_empleados.repository.EmpleadoRepository;
 import com.digitalspace.api_empleados.repository.UsuarioRepository;
 import jakarta.annotation.PostConstruct;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,11 +13,15 @@ import java.util.List;
 @Component
 public class InsertarEmpleadosPorDefecto {
 
-    @Autowired
-    private EmpleadoRepository empleadoRepositoryRepository;
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+    private final EmpleadoRepository empleadoRepositoryRepository;
+
+    private final UsuarioRepository usuarioRepository;
+
+    public InsertarEmpleadosPorDefecto(EmpleadoRepository empleadoRepositoryRepository, UsuarioRepository usuarioRepository) {
+        this.empleadoRepositoryRepository = empleadoRepositoryRepository;
+        this.usuarioRepository = usuarioRepository;
+    }
 
 
     @PostConstruct
