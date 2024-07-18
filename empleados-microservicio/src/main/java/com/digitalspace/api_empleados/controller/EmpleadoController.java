@@ -1,6 +1,7 @@
 package com.digitalspace.api_empleados.controller;
 
 import com.digitalspace.api_empleados.domain.RespuestaCliente;
+import com.digitalspace.api_empleados.service.EmpleadoService;
 import com.digitalspace.api_empleados.service.EmpleadoServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,15 +16,16 @@ import java.util.List;
 @RequestMapping("/api/empleados")
 public class EmpleadoController {
 
-    private final EmpleadoServiceImpl empleadoServiceImpl;
+    // Inyeccion de dependencia de la interfaz, Spring se encarga de instanciar la clase EmpleadoServiceImpl
+    private final EmpleadoService empleadoService;
 
-    public EmpleadoController(EmpleadoServiceImpl empleadoServiceImpl) {
-        this.empleadoServiceImpl = empleadoServiceImpl;
+    public EmpleadoController(EmpleadoService empleadoService) {
+        this.empleadoService = empleadoService;
     }
 
     @GetMapping("{id}")
     public ResponseEntity<Mono<List<RespuestaCliente>>> getClientes(@PathVariable Long id) {
-        Mono<List<RespuestaCliente>> listaClientes = empleadoServiceImpl.getListaClientes(id);
+        Mono<List<RespuestaCliente>> listaClientes = empleadoService.getListaClientes(id);
         return ResponseEntity.ok(listaClientes);
     }
 }
