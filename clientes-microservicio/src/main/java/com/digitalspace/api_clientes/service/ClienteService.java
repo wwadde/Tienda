@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ClienteService {
+public class ClienteService implements ClienteServiceInterface{
 
 
 
@@ -18,12 +18,14 @@ public class ClienteService {
         this.clienteRepository = clienteRepository;
     }
 
+    @Override
     public List<ClienteDatosDto> listarClientes(){
 
         List<ClienteEntity> clientes = clienteRepository.findAll();
         return clientes.stream().map(ClienteDatosDto::new).toList();
     }
 
+    @Override
     public ClienteDatosDto getClienteById(String id) {
         ClienteEntity cliente = clienteRepository.findById(id).orElseThrow();
         return new ClienteDatosDto(cliente);

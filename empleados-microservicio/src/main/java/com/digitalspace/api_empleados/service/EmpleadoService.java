@@ -13,7 +13,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
-public class EmpleadoService {
+public class EmpleadoService implements EmpleadoServiceInterface {
 
 
     private final WebClient webClient;
@@ -25,6 +25,7 @@ public class EmpleadoService {
         this.empleadoRepository = empleadoRepository;
     }
 
+    @Override
     public Mono<List<RespuestaCliente>> getEmpleados(Long id) {
 
         Optional<EmpleadoEntity> empleado = empleadoRepository.findById(id);
