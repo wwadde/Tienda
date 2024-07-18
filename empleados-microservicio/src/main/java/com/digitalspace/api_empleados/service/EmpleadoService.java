@@ -4,8 +4,6 @@ import com.digitalspace.api_empleados.domain.Cargo;
 import com.digitalspace.api_empleados.domain.EmpleadoEntity;
 import com.digitalspace.api_empleados.domain.RespuestaCliente;
 import com.digitalspace.api_empleados.repository.EmpleadoRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -17,11 +15,15 @@ import java.util.Optional;
 @Service
 public class EmpleadoService {
 
-    @Autowired
-    private WebClient webClient;
 
-    @Autowired
-    private EmpleadoRepository empleadoRepository;
+    private final WebClient webClient;
+
+    private final EmpleadoRepository empleadoRepository;
+
+    public EmpleadoService(WebClient webClient, EmpleadoRepository empleadoRepository) {
+        this.webClient = webClient;
+        this.empleadoRepository = empleadoRepository;
+    }
 
     public Mono<List<RespuestaCliente>> getEmpleados(Long id) {
 

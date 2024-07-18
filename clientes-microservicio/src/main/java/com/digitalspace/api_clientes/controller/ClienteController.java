@@ -1,7 +1,6 @@
 package com.digitalspace.api_clientes.controller;
 
 import com.digitalspace.api_clientes.service.ClienteService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,8 +13,12 @@ import java.util.List;
 @RequestMapping("/api/clientes")
 public class ClienteController {
 
-    @Autowired
-    private ClienteService clienteService;
+
+    private final ClienteService clienteService;
+
+    public ClienteController(ClienteService clienteService) {
+        this.clienteService = clienteService;
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getClienteById(@PathVariable String id){
