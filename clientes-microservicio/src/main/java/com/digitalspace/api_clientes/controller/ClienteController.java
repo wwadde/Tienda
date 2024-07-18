@@ -1,7 +1,7 @@
 package com.digitalspace.api_clientes.controller;
 
 import com.digitalspace.api_clientes.domain.ClienteDatosDto;
-import com.digitalspace.api_clientes.service.ClienteService;
+import com.digitalspace.api_clientes.service.ClienteServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,20 +15,20 @@ import java.util.List;
 public class ClienteController {
 
 
-    private final ClienteService clienteService;
+    private final ClienteServiceImpl clienteServiceImpl;
 
-    public ClienteController(ClienteService clienteService) {
-        this.clienteService = clienteService;
+    public ClienteController(ClienteServiceImpl clienteServiceImpl) {
+        this.clienteServiceImpl = clienteServiceImpl;
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ClienteDatosDto> getClienteById(@PathVariable String id){
-        return ResponseEntity.ok(clienteService.getClienteById(id));
+        return ResponseEntity.ok(clienteServiceImpl.getClienteById(id));
     }
 
     @GetMapping
     public ResponseEntity<List<ClienteDatosDto>> getAllClientes(){
-        return ResponseEntity.ok(clienteService.listarClientes());
+        return ResponseEntity.ok(clienteServiceImpl.listarClientes());
     }
 
 

@@ -4,7 +4,7 @@ package com.digitalspace.api_clientes;
 import com.digitalspace.api_clientes.domain.ClienteDatosDto;
 import com.digitalspace.api_clientes.domain.ClienteEntity;
 import com.digitalspace.api_clientes.repository.ClienteRepository;
-import com.digitalspace.api_clientes.service.ClienteService;
+import com.digitalspace.api_clientes.service.ClienteServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,11 +18,11 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-public class ClienteServiceTest {
+public class ClienteServiceImplTest {
 
 
     @Autowired
-    private ClienteService clienteService;
+    private ClienteServiceImpl clienteServiceImpl;
 
     @MockBean
     private ClienteRepository clienteRepository;
@@ -37,7 +37,7 @@ public class ClienteServiceTest {
         // Configurar el mock
         when(clienteRepository.findAll()).thenReturn(listaClientes);
 
-        List<ClienteDatosDto> resultado = clienteService.listarClientes();
+        List<ClienteDatosDto> resultado = clienteServiceImpl.listarClientes();
 
         assertNotNull(resultado);
         assertFalse(resultado.isEmpty());
