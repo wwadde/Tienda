@@ -24,8 +24,8 @@ public class EmpleadoController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Mono<List<RespuestaCliente>>> getClientes(@PathVariable Long id) {
-        Mono<List<RespuestaCliente>> listaClientes = empleadoService.getListaClientes(id);
+    public ResponseEntity<List<RespuestaCliente>> getClientes(@PathVariable Long id) {
+        List<RespuestaCliente> listaClientes = empleadoService.getListaClientes(id);
         return ResponseEntity.ok(listaClientes);
     }
 }

@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface EmpleadoService {
 
-    Mono<List<RespuestaCliente>> getListaClientes(Long id);
+    List<RespuestaCliente> getListaClientes(Long id);
 }
