@@ -1,6 +1,8 @@
 package com.digitalspace.api_empleados.controller;
 
 import com.digitalspace.api_empleados.domain.RespuestaCliente;
+import com.digitalspace.api_empleados.infra.errores.EmpleadoNoEncontradoException;
+import com.digitalspace.api_empleados.infra.errores.PermisosInsuficientesException;
 import com.digitalspace.api_empleados.service.EmpleadoService;
 import com.digitalspace.api_empleados.service.EmpleadoServiceImpl;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +26,7 @@ public class EmpleadoController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<List<RespuestaCliente>> getClientes(@PathVariable Long id) {
+    public ResponseEntity<List<RespuestaCliente>> getClientes(@PathVariable Long id) throws PermisosInsuficientesException, EmpleadoNoEncontradoException {
         List<RespuestaCliente> listaClientes = empleadoService.getListaClientes(id);
         return ResponseEntity.ok(listaClientes);
     }

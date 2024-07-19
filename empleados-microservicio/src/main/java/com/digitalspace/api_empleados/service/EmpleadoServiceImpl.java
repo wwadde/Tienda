@@ -4,6 +4,8 @@ import com.digitalspace.api_empleados.domain.Cargo;
 import com.digitalspace.api_empleados.domain.EmpleadoEntity;
 import com.digitalspace.api_empleados.domain.RespuestaCliente;
 import com.digitalspace.api_empleados.infra.config.RestTemplateConfig;
+import com.digitalspace.api_empleados.infra.errores.EmpleadoNoEncontradoException;
+import com.digitalspace.api_empleados.infra.errores.PermisosInsuficientesException;
 import com.digitalspace.api_empleados.repository.EmpleadoRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -29,18 +31,16 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     }
 
     @Override
-    public List<RespuestaCliente> getListaClientes(Long id) {
+    public List<RespuestaCliente> getListaClientes(Long id) throws EmpleadoNoEncontradoException, PermisosInsuficientesException {
 
         Optional<EmpleadoEntity> empleado = empleadoRepository.findById(id);
 
-        if (empleado.isEmpty()) {
-            throw new NoSuchElementException("No se encontró el empleado con el id: " + id);
-        }
-
-        if (empleado.get().getCargo() == Cargo.EMPLEADO) {
-            throw new IllegalArgumentException("El empleado no tiene permisos para realizar esta acción");
-
-        }
+            if (empleado.isEmpty()) {
+                throw new EmpleadoNoEncontradoException("No se encontró el empleado con el id: " + id);
+            }
+            if (empleado.get().getCargo() == Cargo.EMPLEADO) {
+                throw new PermisosInsuficientesException("El empleado no tiene permisos para realizar esta acción");
+            }
 
         // Configura el rest template para realizar la petición a la uri localhost:8082/api/clientes
 
