@@ -1,25 +1,14 @@
 package com.digitalspace.api_clientes.domain;
 
-public record ClienteDatosDto(
-        String id,
+import lombok.Data;
 
-        String nombre,
+@Data
+public class ClienteDatosDto{
 
-        String apellido,
-
-        String email,
-
-        String telefono,
-
-        String direccion
-) {
-
-    public ClienteDatosDto(ClienteEntity cliente){
-        this(cliente.getId(),
-                cliente.getNombre(),
-                cliente.getApellido(),
-                cliente.getEmail(), cliente.getTelefono(),
-                cliente.getDireccion());
-    }
-
+    private String id;
+    private String nombre;
+    private String apellido;
+    private String email;
+    private String telefono;
+    private String direccion;
 }
