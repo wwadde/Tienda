@@ -1,4 +1,4 @@
-package com.digitalspace.api_clientes.infra;
+package com.digitalspace.api_clientes.infra.config;
 
 
 import org.modelmapper.ModelMapper;

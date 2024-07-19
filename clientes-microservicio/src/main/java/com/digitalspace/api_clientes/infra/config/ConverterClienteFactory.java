@@ -1,4 +1,4 @@
-package com.digitalspace.api_clientes.infra;
+package com.digitalspace.api_clientes.infra.config;
 
 import com.digitalspace.api_clientes.domain.ClienteDatosDto;
 import com.digitalspace.api_clientes.domain.ClienteEntity;
