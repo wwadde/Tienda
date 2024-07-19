@@ -8,15 +8,11 @@ import com.digitalspace.api_empleados.infra.errores.ClienteException;
 import com.digitalspace.api_empleados.infra.errores.EmpleadoNoEncontradoException;
 import com.digitalspace.api_empleados.infra.errores.PermisosInsuficientesException;
 import com.digitalspace.api_empleados.repository.EmpleadoRepository;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
