@@ -2,10 +2,13 @@ package com.digitalspace.api_clientes.service;
 
 import com.digitalspace.api_clientes.domain.ClienteDatosDto;
 import com.digitalspace.api_clientes.domain.ClienteEntity;
+import com.digitalspace.api_clientes.infra.erorres.ClienteException;
 import com.digitalspace.api_clientes.repository.ClienteRepository;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -37,9 +40,12 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public ClienteDatosDto getClienteById(String id) {
-        ClienteEntity cliente = clienteRepository.findById(id).orElseThrow();
-        return entityToClienteDatosDto.apply(cliente);
+    public ClienteDatosDto getClienteById(String id) throws ClienteException {
+        Optional<ClienteEntity> cliente = clienteRepository.findById(id);
+        if (cliente.isEmpty()){
+            throw new ClienteException("Cliente no encontrado");
+        }
+        return entityToClienteDatosDto.apply(cliente.get());
 
     }
 }

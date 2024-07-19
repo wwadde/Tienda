@@ -1,4 +1,4 @@
-package com.digitalspace.api_clientes.infra;
+package com.digitalspace.api_clientes.infra.erorres;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
