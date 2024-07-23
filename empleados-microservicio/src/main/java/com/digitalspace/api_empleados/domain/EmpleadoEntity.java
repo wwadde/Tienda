@@ -12,13 +12,19 @@ public class EmpleadoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nombre;
+
     private String apellido;
+
     private String email;
+
     private String telefono;
+
     @Enumerated(EnumType.STRING)
     private Cargo cargo;
-    @ManyToOne(fetch = FetchType.EAGER)
+
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id")
     private UsuarioEntity usuario;
 
