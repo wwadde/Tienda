@@ -20,14 +20,11 @@ export function hacerPeticion(endpoint, body) {
             return response.json();
         })
         .then(data => {
-            // Handle the response from the backend
             console.log('prueba2');
             console.log(data);
-            // Aquí podrías redirigir al usuario o mostrar un mensaje de éxito
+
         })
         .catch(error => {
-            // Handle any errors
             console.error(error);
-            // Mostrar al usuario un mensaje de error
         });
 }
