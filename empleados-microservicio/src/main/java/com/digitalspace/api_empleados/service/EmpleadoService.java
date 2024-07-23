@@ -1,5 +1,6 @@
 package com.digitalspace.api_empleados.service;
 
+import com.digitalspace.api_empleados.domain.DatosEmpleadoFront;
 import com.digitalspace.api_empleados.domain.RespuestaCliente;
 import com.digitalspace.api_empleados.infra.errores.ClienteException;
 import com.digitalspace.api_empleados.infra.errores.EmpleadoNoEncontradoException;
@@ -11,4 +12,6 @@ import java.util.List;
 public interface EmpleadoService {
 
     List<RespuestaCliente> getListaClientes(Long id) throws EmpleadoNoEncontradoException, PermisosInsuficientesException, ClienteException;
+
+    DatosEmpleadoFront poblacionDatosEmpleadoFront(Long usuarioId) throws EmpleadoNoEncontradoException;
 }

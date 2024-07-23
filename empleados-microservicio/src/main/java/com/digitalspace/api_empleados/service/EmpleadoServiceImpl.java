@@ -1,6 +1,7 @@
 package com.digitalspace.api_empleados.service;
 
 import com.digitalspace.api_empleados.domain.Cargo;
+import com.digitalspace.api_empleados.domain.DatosEmpleadoFront;
 import com.digitalspace.api_empleados.domain.EmpleadoEntity;
 import com.digitalspace.api_empleados.domain.RespuestaCliente;
 import com.digitalspace.api_empleados.infra.config.RestTemplateConfig;
@@ -14,6 +15,7 @@ import org.springframework.web.client.RestClientException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 
 @Service
 public class EmpleadoServiceImpl implements EmpleadoService {
@@ -23,9 +25,12 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 
     private final EmpleadoRepository empleadoRepository;
 
-    public EmpleadoServiceImpl(RestTemplateConfig restTemplate, EmpleadoRepository empleadoRepository) {
+    private final Function<EmpleadoEntity, DatosEmpleadoFront> empleadoEntityToDatosEmpleadoFront;
+
+    public EmpleadoServiceImpl(RestTemplateConfig restTemplate, EmpleadoRepository empleadoRepository, Function<EmpleadoEntity, DatosEmpleadoFront> empleadoEntityToDatosEmpleadoFront) {
         this.restTemplate = restTemplate;
         this.empleadoRepository = empleadoRepository;
+        this.empleadoEntityToDatosEmpleadoFront = empleadoEntityToDatosEmpleadoFront;
     }
 
     @Override
@@ -55,5 +60,15 @@ public class EmpleadoServiceImpl implements EmpleadoService {
             throw new ClienteException("Error al obtener los clientes");
         }
 
+    }
+
+    @Override
+    public DatosEmpleadoFront poblacionDatosEmpleadoFront(Long usuarioId) throws EmpleadoNoEncontradoException {
+        EmpleadoEntity empleadoEntity = empleadoRepository.findByUsuarioId(usuarioId)
+                .orElseThrow(() -> new EmpleadoNoEncontradoException("No se encontró el empleado con el usuarioId: " + usuarioId));
+
+        DatosEmpleadoFront datos = empleadoEntityToDatosEmpleadoFront.apply(empleadoEntity);
+        datos.setId(usuarioId);
+        return datos;
     }
 }
