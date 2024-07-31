@@ -29,9 +29,9 @@ public class InsertarEmpleadosPorDefecto {
         // Verificar que la tabla este vacia
         if (usuarioRepository.count() == 0) {
             List<UsuarioEntity> usuariosPorDefecto = List.of(
-                    new UsuarioEntity("admin", "admin"),
-                    new UsuarioEntity("empleado1", "123456"),
-                    new UsuarioEntity("jefe", "123456")
+                    new UsuarioEntity("admin", "$2a$10$xQtImqk59K9qzbjBVUa1jugGL7DKIEWF.y58oA.ky3iQLJBg5rYxi", Cargo.ADMINISTRADOR), // admin
+                    new UsuarioEntity("empleado1", "$2a$10$LdkOQHyotBY/nPGe1v77R.a8/1OfV2Oy8PQcJWK7NsZg2ra3en7V6", Cargo.EMPLEADO), //123456
+                    new UsuarioEntity("jefe", "$2a$10$LdkOQHyotBY/nPGe1v77R.a8/1OfV2Oy8PQcJWK7NsZg2ra3en7V6", Cargo.JEFE) // 123456
 
             );
             usuarioRepository.saveAll(usuariosPorDefecto);
@@ -41,10 +41,10 @@ public class InsertarEmpleadosPorDefecto {
             UsuarioEntity usuario3 = usuarioRepository.findByUsername("jefe").get();
 
             List<EmpleadoEntity> empleadosPorDefecto = List.of(
-                    new EmpleadoEntity("Empleado 1", "Apellido 1", "email1", "123456789", Cargo.ADMINISTRADOR, usuario),
-            new EmpleadoEntity("Empleado 2", "Apellido 2", "email2", "123456789", Cargo.EMPLEADO, usuario2),
+                    new EmpleadoEntity("Empleado 1", "Apellido 1", "email1", "123456789", usuario),
+            new EmpleadoEntity("Empleado 2", "Apellido 2", "email2", "123456789", usuario2),
 
-            new EmpleadoEntity("Empleado 3", "Apellido 3", "email2", "123456789", Cargo.JEFE, usuario3)
+            new EmpleadoEntity("Empleado 3", "Apellido 3", "email2", "123456789", usuario3)
 
             );
             empleadoRepositoryRepository.saveAll(empleadosPorDefecto);

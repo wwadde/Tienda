@@ -9,6 +9,8 @@ import com.digitalspace.api_empleados.infra.errores.ClienteException;
 import com.digitalspace.api_empleados.infra.errores.EmpleadoNoEncontradoException;
 import com.digitalspace.api_empleados.infra.errores.PermisosInsuficientesException;
 import com.digitalspace.api_empleados.repository.EmpleadoRepository;
+import com.digitalspace.api_empleados.repository.UsuarioRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 
@@ -18,6 +20,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 @Service
+@RequiredArgsConstructor
 public class EmpleadoServiceImpl implements EmpleadoService {
 
 
@@ -25,13 +28,10 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 
     private final EmpleadoRepository empleadoRepository;
 
+    private final UsuarioRepository usuarioRepository;
+
     private final Function<EmpleadoEntity, DatosEmpleadoFront> empleadoEntityToDatosEmpleadoFront;
 
-    public EmpleadoServiceImpl(RestTemplateConfig restTemplate, EmpleadoRepository empleadoRepository, Function<EmpleadoEntity, DatosEmpleadoFront> empleadoEntityToDatosEmpleadoFront) {
-        this.restTemplate = restTemplate;
-        this.empleadoRepository = empleadoRepository;
-        this.empleadoEntityToDatosEmpleadoFront = empleadoEntityToDatosEmpleadoFront;
-    }
 
     @Override
     public List<RespuestaCliente> getListaClientes(Long id) throws EmpleadoNoEncontradoException, PermisosInsuficientesException, ClienteException {
@@ -41,7 +41,9 @@ public class EmpleadoServiceImpl implements EmpleadoService {
         if (empleado.isEmpty()) {
             throw new EmpleadoNoEncontradoException("No se encontró el empleado con el id: " + id);
         }
-        if (empleado.get().getCargo() == Cargo.EMPLEADO) {
+
+        var usuario = usuarioRepository.findById(empleado.get().getUsuario().getId());
+        if (usuario.get().getCargo() == Cargo.EMPLEADO) {
             throw new PermisosInsuficientesException("El empleado no tiene permisos para realizar esta acción");
         }
 

@@ -11,13 +11,19 @@ public class ErrorHandler {
 
     @ExceptionHandler(EmpleadoNoEncontradoException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<?> clienteNoEncontrado(EmpleadoNoEncontradoException e){
+    public ResponseEntity<String> clienteNoEncontrado(EmpleadoNoEncontradoException e){
         return ResponseEntity.badRequest().body(e.getMessage());
     }
 
     @ExceptionHandler(PermisosInsuficientesException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<?> clienteNoEncontrado(PermisosInsuficientesException e){
+    public ResponseEntity<String> clienteNoEncontrado(PermisosInsuficientesException e){
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
+
+    @ExceptionHandler(EmpleadoException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<String> EmpleadoExistente(EmpleadoException e){
         return ResponseEntity.badRequest().body(e.getMessage());
     }
 

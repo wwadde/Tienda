@@ -1,4 +1,4 @@
-package com.digitalspace.api_empleados.infra.config;
+package com.digitalspace.api_empleados.infra.config.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

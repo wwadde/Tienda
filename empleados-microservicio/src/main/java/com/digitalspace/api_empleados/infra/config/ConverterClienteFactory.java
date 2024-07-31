@@ -1,4 +1,4 @@
-package com.digitalspace.api_empleados.infra.config.config;
+package com.digitalspace.api_empleados.infra.config;
 
 
 import com.digitalspace.api_empleados.domain.DatosEmpleadoFront;
