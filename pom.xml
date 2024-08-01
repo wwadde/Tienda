@@ -11,16 +11,15 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>org.digitalspace</groupId>
-    <artifactId>microservices-parent-PruebaTecnica</artifactId>
+    <groupId>org.william</groupId>
+    <artifactId>Tienda</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>clientes-microservicio</module>
-        <module>empleados-microservicio</module>
+        <module>productos-service</module>
+        <module>clientes-service</module>
         <module>discovery-server</module>
-        <module>gateway-api</module>
     </modules>
 
     <properties>
